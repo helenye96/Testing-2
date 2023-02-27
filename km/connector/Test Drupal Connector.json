@@ -1,0 +1,142 @@
+{
+  "$id": "drupalDocument_documentConnector",
+  "$schema": "https://schema.yext.com/config/km/connector/v3",
+  "displayName": "Drupal Document Connector",
+  "entityType": "drupalDocument_document",
+  "source": {
+    "sourceConfig": {
+      "nativeSourceConfig": {
+        "source": "drupal",
+        "operation": "fetchDocumentType",
+        "inputs": {
+          "drupalDomain": "${{drupalDomain}}"
+          }
+        }
+    },
+    "selectors": [
+      {
+        "type": "JSON",
+        "header": "Name",
+        "path": "attributes.name"
+      },
+      {
+        "type": "JSON",
+        "header": "Entity ID",
+        "path": "id"
+      },
+      {
+        "type": "JSON",
+        "header": "Created Date",
+        "path": "attributes.created"
+      },
+      {
+        "type": "JSON",
+        "header": "Landing Page URL",
+        "path": "relationships.field_media_document.data.id"
+      },
+      {
+        "type": "JSON",
+        "header": "Creator",
+        "path": "relationships.uid.data.id"
+      },
+      {
+        "type": "JSON",
+        "header": "File Type",
+        "path": "attributes.field_mime"
+      }
+    ]
+  },
+  "transforms": [
+    {
+      "function": {
+        "inputHeaders": {
+          "headers": [
+            "Landing Page URL"
+          ]
+        },
+        "plugin": "drupalDocument_extractFileUrl",
+        "function": "extractFileUrl"
+      }
+    },
+    {
+      "function": {
+        "inputHeaders": {
+          "headers": [
+            "Creator"
+          ]
+        },
+        "plugin": "drupalDocument_getUser",
+        "function": "getUser"
+      }
+    },
+    {
+      "extractText": {
+        "inputHeader": "Created Date",
+        "newColumnHeader": "Created Date - Formatted",
+        "extractOperation": "ALL_TEXT_BEFORE",
+        "extractFrom": "FIRST_INSTANCE_MATCHING_TEXT",
+        "valueToFind": {
+          "plainText": {
+            "value": "T",
+            "ignoreCase": false
+          }
+        }
+      }
+    },
+    {
+      "extractText": {
+        "inputHeader": "File Type",
+        "newColumnHeader": "File Type - Formatted",
+        "extractOperation": "ALL_TEXT_AFTER",
+        "extractFrom": "FIRST_INSTANCE_MATCHING_TEXT",
+        "valueToFind": {
+          "plainText": {
+            "value": "/",
+            "ignoreCase": false
+          }
+        }
+      }
+    }
+  ],
+  "mappings": [
+    {
+      "field": "landingPageUrl",
+      "header": "Landing Page URL",
+      "subfieldPath": []
+    },
+    {
+      "field": "entityId",
+      "header": "Entity ID",
+      "subfieldPath": []
+    },
+    {
+      "field": "drupalDocument_creator",
+      "header": "Creator",
+      "subfieldPath": []
+    },
+    {
+      "field": "drupalDocument_createdDate",
+      "header": "Created Date - Formatted",
+      "subfieldPath": []
+    },
+    {
+      "field": "name",
+      "header": "Name",
+      "subfieldPath": []
+    },
+    {
+      "field": "drupalDocument_fileType",
+      "header": "File Type - Formatted",
+      "subfieldPath": []
+    }
+  ],
+  "scheduleConfig": {
+    "customSchedule": {
+      "timeZone": "America/New_York",
+      "startDate": "2022-10-10",
+      "startTime": "00:00",
+      "frequencyType": "DAILY"
+    },
+    "runMode": "COMPREHENSIVE"
+  }
+}
