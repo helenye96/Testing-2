@@ -9,8 +9,7 @@
         "source": "skilljar",
         "operation": "fetchCourses",
         "inputs": {
-          "domainName": "${{domainName}}",
-          "zendeskSubdomain": "${{zendeskSubdomain}}"
+          "domainName": "${{domainName}}"
           }
         }
     },
