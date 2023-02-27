@@ -10,7 +10,7 @@
         "operation": "fetchCourses",
         "inputs": {
           "domainName": "${{domainName}}",
-          "URL": "${{zendeskSubdomain}}"
+          "zendeskSubdomain": "${{zendeskSubdomain}}"
           }
         }
     },
