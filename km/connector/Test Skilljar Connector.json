@@ -9,7 +9,8 @@
         "source": "skilljar",
         "operation": "fetchCourses",
         "inputs": {
-          "domainName": "${{domainName}}"
+          "domainName": "${{domainName}}",
+          "apiKey": "${{apiKey}}"
           }
         }
     },
