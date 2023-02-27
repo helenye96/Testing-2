@@ -1,13 +1,13 @@
 {
-  "$id": "skilljar_lessonConnector",
+  "$id": "skilljar_courseConnector",
   "$schema": "https://schema.yext.com/config/km/connector/v3",
-  "displayName": "Skilljar Lesson Connector",
-  "entityType": "skilljar_lesson",
+  "displayName": "Skilljar Course Connector",
+  "entityType": "skilljar_course",
   "source": {
     "sourceConfig": {
       "nativeSourceConfig": {
         "source": "skilljar",
-        "operation": "fetchLessons",
+        "operation": "fetchCourses",
         "inputs": {
           "domainName": "${{domainName}}",
           "apiKey": "${{apiKey}}"
@@ -17,13 +17,13 @@
     "selectors": [
       {
         "type": "JSON",
-        "header": "Entity ID",
+        "header": "id",
         "path": "id"
       },
       {
         "type": "JSON",
-        "header": "Name",
-        "path": "title"
+        "header": "course.id",
+        "path": "course.id"
       },
       {
         "type": "JSON",
@@ -32,35 +32,150 @@
       },
       {
         "type": "JSON",
-        "header": "Rich Text Description",
-        "path": "description_html"
+        "header": "course.lesson_count",
+        "path": "course.lesson_count"
       },
       {
         "type": "JSON",
-        "header": "Keywords",
+        "header": "course.required_lesson_count",
+        "path": "course.required_lesson_count"
+      },
+      {
+        "type": "JSON",
+        "header": "slug",
+        "path": "slug"
+      },
+      {
+        "type": "JSON",
+        "header": "course_url",
+        "path": "course_url"
+      },
+      {
+        "type": "JSON",
+        "header": "hidden",
+        "path": "hidden"
+      },
+      {
+        "type": "JSON",
+        "header": "registration_required",
+        "path": "registration_required"
+      },
+      {
+        "type": "JSON",
+        "header": "timezone",
+        "path": "timezone"
+      },
+      {
+        "type": "JSON",
+        "header": "offer.id",
+        "path": "offer.id"
+      },
+      {
+        "type": "JSON",
+        "header": "offer.registration_open",
+        "path": "offer.registration_open"
+      },
+      {
+        "type": "JSON",
+        "header": "offer.registration_url",
+        "path": "offer.registration_url"
+      },
+      {
+        "type": "JSON",
+        "header": "offer.price.amount",
+        "path": "offer.price.amount"
+      },
+      {
+        "type": "JSON",
+        "header": "offer.price.currency_code",
+        "path": "offer.price.currency_code"
+      },
+      {
+        "type": "JSON",
+        "header": "course.short_description",
+        "path": "course.short_description"
+      },
+      {
+        "type": "JSON",
+        "header": "course.long_description_html",
+        "path": "course.long_description_html"
+      },
+      {
+        "type": "JSON",
+        "header": "course.lesson_list[].id",
+        "path": "course.lesson_list[].id"
+      },
+      {
+        "type": "JSON",
+        "header": "course.lesson_list[].title",
+        "path": "course.lesson_list[].title"
+      },
+      {
+        "type": "JSON",
+        "header": "course.lesson_list[].description_html",
+        "path": "course.lesson_list[].description_html"
+      },
+      {
+        "type": "JSON",
+        "header": "course.lesson_list[].search_keywords",
+        "path": "course.lesson_list[].search_keywords"
+      },
+      {
+        "type": "JSON",
+        "header": "tags",
+        "path": "tags"
+      },
+      {
+        "type": "JSON",
+        "header": "search_keywords",
         "path": "search_keywords"
       }
     ]
   },
   "mappings": [
     {
+      "field": "name",
+      "header": "course.title",
+      "subfieldPath": []
+    },
+    {
+      "field": "skilljar_courseLessons",
+      "header": "course.lesson_list[].title",
+      "subfieldPath": []
+    },
+    {
+      "field": "shortDescription",
+      "header": "course.short_description",
+      "subfieldPath": []
+    },
+    {
+      "field": "landingPageUrl",
+      "header": "course_url",
+      "subfieldPath": []
+    },
+    {
       "field": "richTextDescription",
-      "header": "Rich Text Description",
+      "header": "course.long_description_html",
       "subfieldPath": []
     },
     {
       "field": "entityId",
-      "header": "Entity ID",
+      "header": "id",
       "subfieldPath": []
     },
     {
-      "field": "name",
-      "header": "Name",
+      "field": "skilljar_lessonCount",
+      "header": "course.lesson_count",
       "subfieldPath": []
     },
     {
-      "field": "keywords",
-      "header": "Keywords",
+      "field": "skilljar_courseCategory",
+      "header": "tags",
+      "subfieldPath": []
+    },
+    {
+      "field": "skilljar_lessonsList",
+      "header": "course.lesson_list[].id",
       "subfieldPath": []
     }
   ],
