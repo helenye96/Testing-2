@@ -10,7 +10,7 @@
         "operation": "fetchCourses",
         "inputs": {
           "domainName": "${{domainName}}",
-          "apiKey": "${{apiKey}}"
+          "URL": "${{URL}}"
           }
         }
     },
