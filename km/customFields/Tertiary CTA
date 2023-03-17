@@ -1,9 +1,0 @@
-{
-  "$id": "c_tertiaryCTA",
-  "$schema": "https://schema.yext.com/config/km/field/v1",
-  "description": "Third CTA Option",
-  "displayName": "Tertiary CTA",
-  "group": "NONE",
-  "localization": "PRIMARY_ONLY",
-  "typeId": "cta"
-}
